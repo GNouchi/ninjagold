@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/css/foundation.min.css" integrity="sha256-iJQ8dZac/jUYHxiEnZJsyVpKcdq2sQvdA7t02QFmp30= sha384-SplqNBo/0ZlvSdwrP/riIPDozO5ck8+yIm++KVqyMAC53S6m3BaV+2OLpi7ULOOh sha512-ho6hK4sAWdCeqopNZWNy1d9Ok2hzfTLQLcGSr8ZlRzDzh6tNHkVoqSl6wgLsqls3yazwiG9H9dBCtSfPuiLRCQ==" crossorigin="anonymous">
+<!-- Compressed JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/js/foundation.min.js" integrity="sha256-G6jsRyH1fxbsvFIXSCuwYmI1aIDYBa28xscrvmYjJy0= sha384-vtoG68NvPc9azmFJr447vvY8qgdyA4FdaJ5/bqvzIM4eAdZfO0iyRRF8l2AAscYI sha512-43seCcNrHA0BQgrtyajB9sp8yOdv5c8QdYvgjP7zJ7v+dmzAcxYDQ2gupb9aztsNWBq1COIp/3NHYkQs4l/dkg==" crossorigin="anonymous"></script>
+<!-- icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<title>Foundation Starter Template</title>
+    <style>
+        .score, .randnum{
+            display: inline-block;
+            margin-left: 25px;
+            color: yellow;}
+        .reset {
+            display: inline-block;
+            margin-left: 25px;
+            border-radius:4px}
+        .container2{
+            background: grey;
+            min-height: 900px;
+            padding: 25px 25px 25px 25px;
+            }
+        .container, .grid-x{text-align: center;}
+        .randnum{color: orange;}
+        .positive{color: green;}
+        .negative{color: red;}
+        .log{
+            background: linear-gradient(to top right,lightblue,  lightgray,lightblue, gray,gray);
+            min-height: 800px;
+            padding: 0px 5% 5% 5%;
+            border-radius: 4px;
+            }
+        h3{
+            color:rgb(209, 144, 38) ;
+            font-style: oblique;
+            border-bottom: 5px solid darkgrey;
+            padding: 10px 10px;
+            text-indent: 15px;
+        }
+        h4{
+            text-indent: 4em;
+        }
+    </style>
+</head>
+<body>
+<div class="title-bar">
+    <div class="title-bar-left ">
+        <i class="large material-icons">whatshot</i>
+        <div class="title-bar-title small small-only-expanded">Ninja Gold </div>
+        {{ score|safe }}
+        {{ randnum|safe }}
+        <form action="/reset" method = "POST" class = "reset">
+            <button class="button alert reset" name="reset" type="submit"/>Reset</button>
+        </form>
+    </div>
+</div>
+<!-- start button container -->
+<div >
+<form action="/process_money" method="POST">
+
+    <div class="grid-x grid-padding-x small-up-4 medium-up-3">
+
+        <div class="card">
+            <div class="card-divider">
+                <h4>
+                <img src="https://cdn2.iconfinder.com/data/icons/people-18/124/people-person-worker-profession-work-job_37-512.png" alt="ninjaicon" style="max-height:45px;">  
+                Farm
+                </h4>
+            </div>
+            <div class="card-section"><p>Do you even till bro?</p>
+                <button class=button name="farm" type="submit" value="farm">Find Gold!</button>
+            </div>
+        </div>
+        <div class="card">
+                <div class="card-divider">
+                        <h4>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUsEvEuvRibSG3iTnV6VBLgbOk9VVYL36_7r4-fCspGCwzM27l" alt="ninjaicon" style="max-height:45px;">  
+                        Cave
+                        </h4>
+                    </div>
+                    <div class="card-section"><p>Its dark..</p>
+                    <button class=button name="cave" type="submit" value="cave" >Find Gold!</button>
+                </div>
+            </div>
+
+        <div class="card">
+            <div class="card-divider">                        <h4>
+                <img src="https://cdn4.iconfinder.com/data/icons/icon-flat-icon-set/50/home-512.png" alt="ninjaicon" style="max-height:45px;">  
+                House
+                </h4>
+            </div>
+            <div class="card-section"><p>Steal from roomates</p>
+                <button class=button name="house" type="submit" value="house">Find Gold!</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-divider">
+                <h4>
+                <img src="https://cdn3.iconfinder.com/data/icons/casino-and-gambling-icons/489/Dice-2-512.png" alt="ninjaicon" style="max-height:45px;">  
+                Casino
+                </h4>
+            </div>
+            <div class="card-section"><p>Test your luck!</p>
+                <button class=button name="casino" type="submit" value="casino">Find Gold!</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+<div class ="container2">
+    <div class="log"> 
+        <h3>
+            <img src="https://static.thenounproject.com/png/23386-200.png" alt="ninjaicon" style="height:75px;">   
+            Adventure log
+        </h3>        
+
+        {% for i in range(session['log']|length): %}
+            <p>{{session['log'][session['log']|length-1-i]|safe}} </p>
+        {% endfor %}
+    
+    </div>
+</div>
+    <script>
+      $(document).foundation();
+    </script>
+
+</body>
+</html>
